@@ -1,0 +1,74 @@
+{
+  "name": "react-interactive-paycard",
+  "version": "0.0.1",
+  "description": "React Interactive Paycard for ReactJS, NextJS App Router",
+  "keywords": [
+    "react",
+    "reactjs",
+    "nextjs",
+    "form",
+    "credit",
+    "credit-card",
+    "animation",
+    "typescript",
+    "react-interactive-paycard",
+    "react-animation",
+    "react-css-transition-group",
+    "react-credit-card",
+    "react-animated-css"
+  ],
+  "homepage": "https://github.com/MinhOmega/react-interactive-paycard#readme",
+  "bugs": {
+    "url": "https://github.com/MinhOmega/react-interactive-paycard/issues"
+  },
+  "license": "MIT",
+  "author": "Vo Ngoc Quang Minh",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "scripts": {
+    "build": "npm run build:ts && npm run build:css",
+    "build:css": "postcss src/style.css -o dist/style.css",
+    "build:ts": "tsc",
+    "format": "prettier --write . --config ./.prettierrc",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix . --ext .{js,jsx,ts,tsx} && yarn lint:styles",
+    "lint:styles": "prettier --write \"**/*.{css,scss}\" --config ./.prettierrc",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-transition-group": "^4.4.5",
+    "sass": "^1.77.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.8.0",
+    "postcss": "^8.4.41",
+    "postcss-cli": "^11.0.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-packagejson": "^2.5.1",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
