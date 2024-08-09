@@ -96,16 +96,6 @@ const CreditCard: React.FC<CreditCardProps> = ({
   const cardType = (cardNumber: string): CardType => {
     const number = cardNumber
     let re: RegExp
-    const CARDS: Record<CardType, string> = {
-      amex: '^3[47][0-9]{13}$',
-      diners: '^3(?:0[0-5]|[68][0-9])[0-9]{11}$',
-      discover: '^6(?:011|5[0-9]{2})[0-9]{12}$',
-      mastercard: '^5[1-5][0-9]{14}$',
-      troy: '^9792[0-9]{12}$',
-      unionpay: '^62[0-9]{14,17}$',
-      visa: '^4[0-9]{12}(?:[0-9]{3})?$',
-    }
-
     for (const [card, pattern] of Object.entries(CARDS)) {
       re = new RegExp(pattern)
       if (number.match(re) !== null) {
