@@ -57,7 +57,7 @@ const FormCardInput: React.FC<CreditCardProps> = ({
         .replace(/(\d{4}) (\d{4}) (\d{4})/, '$1 $2 $3 ')
     }
 
-    setCardNumber(cardNumber.trimRight())
+    setCardNumber(cardNumber.trimEnd())
     onUpdateState(name as INPUT_TYPES, cardNumber)
   }
 

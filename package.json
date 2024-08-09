@@ -1,7 +1,7 @@
 {
   "name": "react-interactive-paycard",
   "version": "0.0.1",
-  "description": "React Interactive Paycard for ReactJS, NextJS App Router",
+  "description": "React Interactive Pay Card for ReactJS, NextJS App Router",
   "keywords": [
     "react",
     "reactjs",
@@ -37,7 +37,6 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix . --ext .{js,jsx,ts,tsx} && yarn lint:styles",
     "lint:styles": "prettier --write \"**/*.{css,scss}\" --config ./.prettierrc",
-    "prepare": "husky",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -52,8 +51,10 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/react-transition-group": "^4.4.10",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.4.41",
     "postcss-cli": "^11.0.0",
     "prettier": "^3.3.3",

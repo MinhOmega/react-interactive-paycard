@@ -3,7 +3,11 @@ import { CSSTransition, SwitchTransition, TransitionGroup } from 'react-transiti
 import './styles.scss'
 import { FORM_FIELDS } from './interactive-pay-card'
 
-const imagesCardType = {
+type CardType = 'amex' | 'diners' | 'discover' | 'mastercard' | 'troy' | 'unionpay' | 'visa'
+
+type ImagesCardType = Record<CardType, string>
+
+const imagesCardType: ImagesCardType = {
   amex: 'https://github.com/user-attachments/assets/8c6a945e-82d7-43bd-a649-addeb547bd2c',
   diners: 'https://github.com/user-attachments/assets/e7aa1d25-f24a-4099-a7b3-3fd78a3a625b',
   discover: 'https://github.com/user-attachments/assets/5e6645dc-c981-4f56-a6d1-a188441544fb',
@@ -13,7 +17,12 @@ const imagesCardType = {
   visa: 'https://github.com/user-attachments/assets/ab3ac91f-ca1c-471e-bce1-c68e3053e383',
 }
 
-const cardBackgrounds = {
+/**
+ * Map of card backgrounds by card index.
+ *
+ * @type {Record<number, string>}
+ */
+const cardBackgrounds: Record<number, string> = {
   1: 'https://github.com/user-attachments/assets/1fe78b35-3611-4219-91e1-78057b065d6b',
   2: 'https://github.com/user-attachments/assets/078ad1e1-8feb-423c-ba6d-44ccdadb7237',
   3: 'https://github.com/user-attachments/assets/2dc5a1d3-1987-40c3-a579-cdb74409aeb9',
@@ -84,20 +93,30 @@ const CreditCard: React.FC<CreditCardProps> = ({
 }): JSX.Element => {
   const [style, setStyle] = useState<React.CSSProperties>({})
 
-  const cardType = (cardNumber: string): string => {
+  const cardType = (cardNumber: string): CardType => {
     const number = cardNumber
     let re: RegExp
+    const CARDS: Record<CardType, string> = {
+      amex: '^3[47][0-9]{13}$',
+      diners: '^3(?:0[0-5]|[68][0-9])[0-9]{11}$',
+      discover: '^6(?:011|5[0-9]{2})[0-9]{12}$',
+      mastercard: '^5[1-5][0-9]{14}$',
+      troy: '^9792[0-9]{12}$',
+      unionpay: '^62[0-9]{14,17}$',
+      visa: '^4[0-9]{12}(?:[0-9]{3})?$',
+    }
+
     for (const [card, pattern] of Object.entries(CARDS)) {
       re = new RegExp(pattern)
       if (number.match(re) !== null) {
-        return card
+        return card as CardType
       }
     }
 
     return 'visa' // default type
   }
 
-  const useCardType = useMemo(() => {
+  const useCardType = useMemo<CardType>(() => {
     return cardType(cardNumber)
   }, [cardNumber])
 
@@ -115,7 +134,9 @@ const CreditCard: React.FC<CreditCardProps> = ({
     if (currentFocusedElm) {
       const style = outlineElementStyle(currentFocusedElm.current) as React.CSSProperties
       setStyle(style)
+      return
     }
+    setStyle({})
   }, [currentFocusedElm])
 
   const maskCardNumber = (cardNumber: string): string[] => {
@@ -187,11 +208,9 @@ const CreditCard: React.FC<CreditCardProps> = ({
                 </TransitionGroup>
               </div>
             </label>
-            <div className="card-item__date">
-              <label className="card-item__dateTitle" onClick={() => onCardElementClick('cardDate')} ref={cardDateRef}>
-                Expires
-              </label>
-              <label className="card-item__dateItem">
+            <div className="card-item__date" onClick={() => onCardElementClick('cardDate')} ref={cardDateRef as any}>
+              <label className="card-item__dateTitle">Expires</label>
+              <label htmlFor="cardMonth" className="card-item__dateItem">
                 <SwitchTransition in-out>
                   <CSSTransition classNames="slide-fade-up" timeout={200} key={cardMonth}>
                     <span>{!cardMonth ? 'MM' : cardMonth} </span>
@@ -202,7 +221,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
               <label htmlFor="cardYear" className="card-item__dateItem">
                 <SwitchTransition out-in>
                   <CSSTransition classNames="slide-fade-up" timeout={250} key={cardYear}>
-                    <span>{!cardYear ? 'YY' : cardYear.toString().substr(-2)}</span>
+                    <span>{!cardYear ? 'YY' : cardYear.toString().substring(cardYear.length - 2)}</span>
                   </CSSTransition>
                 </SwitchTransition>
               </label>

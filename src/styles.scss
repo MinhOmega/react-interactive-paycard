@@ -24,7 +24,6 @@
       }
       &.-back {
         transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);
-        // box-shadow: 0 20px 50px 0 rgba(81, 88, 206, 0.65);
       }
     }
   }
@@ -67,7 +66,7 @@
     box-shadow: 0 5px 16px 0 rgba(14, 42, 84, 0.55);
     transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
     transform-style: preserve-3d;
-    transition: all 0.8s cubic-bezier(0.42, 0, 0, 1.05);
+    transition: all 1.5s cubic-bezier(0.7, -0.4, 0.3, 1.2);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     height: 100%;
@@ -80,13 +79,6 @@
       transform: perspective(2000px) rotateY(-180deg) rotateX(0deg) rotate(0deg);
       z-index: 2;
       padding: 0;
-      // background-color: #2364d2;
-      // background-image: linear-gradient(
-      //   43deg,
-      //   #4158d0 0%,
-      //   #8555c7 46%,
-      //   #2364d2 100%
-      // );
       height: 100%;
 
       .card-item__cover {
@@ -287,12 +279,13 @@
     flex-wrap: wrap;
     font-size: 18px;
     margin-left: auto;
-    padding: 10px;
+    padding: 5px;
     display: inline-flex;
     width: 80px;
     white-space: nowrap;
     flex-shrink: 0;
     cursor: pointer;
+    justify-content: center;
 
     @media screen and (max-width: 480px) {
       font-size: 16px;
@@ -312,6 +305,7 @@
     font-size: 13px;
     padding-bottom: 6px;
     width: 100%;
+    text-align: center;
 
     @media screen and (max-width: 480px) {
       font-size: 12px;
